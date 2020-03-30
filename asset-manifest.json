@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/brandslisten-task/static/js/main.b05ffbd9.chunk.js",
+    "main.js.map": "/brandslisten-task/static/js/main.b05ffbd9.chunk.js.map",
+    "runtime-main.js": "/brandslisten-task/static/js/runtime-main.b1a61028.js",
+    "runtime-main.js.map": "/brandslisten-task/static/js/runtime-main.b1a61028.js.map",
+    "static/js/2.8a61a9d3.chunk.js": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js",
+    "static/js/2.8a61a9d3.chunk.js.map": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js.map",
+    "index.html": "/brandslisten-task/index.html",
+    "precache-manifest.0268d0d36955d71cde43be013eeb72ae.js": "/brandslisten-task/precache-manifest.0268d0d36955d71cde43be013eeb72ae.js",
+    "service-worker.js": "/brandslisten-task/service-worker.js",
+    "static/js/2.8a61a9d3.chunk.js.LICENSE.txt": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1a61028.js",
+    "static/js/2.8a61a9d3.chunk.js",
+    "static/js/main.b05ffbd9.chunk.js"
+  ]
+}
