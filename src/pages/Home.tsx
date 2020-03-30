@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
-import { CssBaseline, Typography, AppBar, Toolbar, Tabs, Tab, Box, Grid, makeStyles } from '@material-ui/core';
-import { Input, Card } from '../components/common';
-import classNames from 'classnames';
+import React, { useState, useEffect } from 'react';
+import {
+  CssBaseline, Typography, AppBar, Toolbar,
+  Tabs, Tab, Grid, makeStyles, CircularProgress
+} from '@material-ui/core';
+import { Input, TabPanel } from '../components/common';
+import MoviesList from '../components/MoviesList';
+import ActorsList from '../components/ActorsList';
+import { SearchMovieService, FetchUpcomingMovieService } from '../services/MoviesService';
+import { FetchActorsService } from '../services/ActorsService';
+import useDebounce from '../ulti/hooks/useDebounce';
+import { tabsConfig } from '../constatns';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: any;
-  value: any;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box p={3}>{children}</Box>}
-    </Typography>
-  );
-}
-
-function a11yProps(index: any) {
+const a11yProps = (index: string) => {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `tab-${index}`,
   };
 }
 
-const useStyles = makeStyles(_ => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: "100%",
   },
@@ -42,12 +26,68 @@ const useStyles = makeStyles(_ => ({
   }
 }));
 
-function Home() {
-  const classes = useStyles();
-  const [value, setValue] = useState(0);
+interface List{
+  message?: string,
+  response: string,
+  payload: any
+}
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+const HomePage = () => {
+  const classes = useStyles();
+  const [currentTab, setCurrentTab] = useState<any>(tabsConfig.movies);
+  const [list, setList] = useState<List>({ response: 'loading', message: "", payload: [] });
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    const fetchUpcomingMovies = async () => {
+      const result = await FetchUpcomingMovieService();
+      setList(result);
+    }
+    fetchUpcomingMovies();
+  }, [])
+
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        setList({ ...list, response: 'loading' });
+        if (currentTab === tabsConfig.movies) {
+          SearchMovieService(debouncedSearchTerm).then(results => {
+            setList({ ...results });
+          });
+        }
+        else {
+          FetchActorsService(debouncedSearchTerm).then(results => {
+            setList({ ...results });
+          });
+        }
+
+      }
+    },
+    [debouncedSearchTerm]
+  );
+
+  const onNavigate = (event: React.ChangeEvent<{}>, newValue: number) => {
+    const fetchUpcomingMovies = async () => {
+      const result = await FetchUpcomingMovieService();
+      setList({ ...result });
+    }
+
+    if (currentTab !== newValue) {
+      setList({ ...{ response: 'loading', payload: [] } });
+      if (newValue === tabsConfig.movies) {
+        fetchUpcomingMovies();
+      } else {
+        setList({ ...{ response: 'success', payload: [] } });
+      }
+      setSearchTerm('');
+      setCurrentTab(newValue);
+    }
+  };
+
+  const onSearchTerm = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value)
   };
 
   return (
@@ -69,43 +109,37 @@ function Home() {
               flexContainer: classes.flexContainer
             }}
               indicatorColor="primary"
-              value={value} onChange={handleChange} aria-label="simple tabs example">
-              <Tab label="Movies" {...a11yProps(0)} />
-              <Tab label="Actors" {...a11yProps(1)} />
+              value={currentTab}
+              onChange={onNavigate}
+              aria-label="simple tabs example">
+              <Tab label="Movies" {...a11yProps(tabsConfig.movies)} />
+              <Tab label="Actors" {...a11yProps(tabsConfig.actors)} />
             </Tabs>
           </Grid>
           <Grid item xs={12} sm={8}>
-
-            <Input />
+            <Input value={searchTerm} onChange={onSearchTerm} />
           </Grid>
         </Grid>
 
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-        </Grid>
-
+      <TabPanel value={currentTab} index={tabsConfig.movies}>
+        {list.response === "loading" ?
+          <Grid container justify="center"
+          ><CircularProgress />
+          </Grid> : null}
+        {list.response === "success" ? <MoviesList list={list.payload} /> : null}
+        {list.response === "error" ? list.message : null}
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        No results found
+      <TabPanel value={currentTab} index={1}>
+        {list.response === "loading" ?
+          <Grid container justify="center"
+          ><CircularProgress />
+          </Grid> : null}
+        {list.response === "success" ? <ActorsList list={list.payload} /> : null}
+        {list.response === "error" ? list.message : null}
       </TabPanel>
     </>
   );
 }
 
-export default Home;
+export default HomePage;

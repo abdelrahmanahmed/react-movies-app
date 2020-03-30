@@ -1,6 +1,5 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import React,{useEffect} from 'react';
+import { createStyles, makeStyles, Theme, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,12 +12,13 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Input() {
+const Input = ({ onChange, value }: any) => {
   const classes = useStyles();
-
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="standard-basic" label="Search" />
+      <TextField value={value} onChange={onChange} id="standard-basic" label="Search" />
     </form>
   );
 }
+
+export default Input;
