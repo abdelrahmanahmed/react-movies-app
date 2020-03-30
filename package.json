@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://abdelrahmanahmed.github.io/brandslisten-task",
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@testing-library/jest-dom": "^4.2.4",
@@ -22,6 +23,8 @@
   },
   "scripts": {
     "start": "env-cmd -f ./.env react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
   }
 }

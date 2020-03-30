@@ -9,7 +9,7 @@ import ActorsList from '../components/ActorsList';
 import { SearchMovieService, FetchUpcomingMovieService } from '../services/MoviesService';
 import { FetchActorsService } from '../services/ActorsService';
 import useDebounce from '../ulti/hooks/useDebounce';
-import { tabsConfig } from '../constatns';
+import { tabsConfig } from '../constants';
 
 const a11yProps = (index: string) => {
   return {
