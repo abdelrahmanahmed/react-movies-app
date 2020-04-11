@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/brandslisten-task/static/js/main.b05ffbd9.chunk.js",
-    "main.js.map": "/brandslisten-task/static/js/main.b05ffbd9.chunk.js.map",
-    "runtime-main.js": "/brandslisten-task/static/js/runtime-main.b1a61028.js",
-    "runtime-main.js.map": "/brandslisten-task/static/js/runtime-main.b1a61028.js.map",
-    "static/js/2.8a61a9d3.chunk.js": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js",
-    "static/js/2.8a61a9d3.chunk.js.map": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js.map",
-    "index.html": "/brandslisten-task/index.html",
-    "precache-manifest.0268d0d36955d71cde43be013eeb72ae.js": "/brandslisten-task/precache-manifest.0268d0d36955d71cde43be013eeb72ae.js",
-    "service-worker.js": "/brandslisten-task/service-worker.js",
-    "static/js/2.8a61a9d3.chunk.js.LICENSE.txt": "/brandslisten-task/static/js/2.8a61a9d3.chunk.js.LICENSE.txt"
+    "main.js": "/react-movies-app/static/js/main.ae1a9291.chunk.js",
+    "main.js.map": "/react-movies-app/static/js/main.ae1a9291.chunk.js.map",
+    "runtime-main.js": "/react-movies-app/static/js/runtime-main.2d1311fd.js",
+    "runtime-main.js.map": "/react-movies-app/static/js/runtime-main.2d1311fd.js.map",
+    "static/js/2.8a61a9d3.chunk.js": "/react-movies-app/static/js/2.8a61a9d3.chunk.js",
+    "static/js/2.8a61a9d3.chunk.js.map": "/react-movies-app/static/js/2.8a61a9d3.chunk.js.map",
+    "index.html": "/react-movies-app/index.html",
+    "precache-manifest.07bce8dc7a5323d997411da390c03a11.js": "/react-movies-app/precache-manifest.07bce8dc7a5323d997411da390c03a11.js",
+    "service-worker.js": "/react-movies-app/service-worker.js",
+    "static/js/2.8a61a9d3.chunk.js.LICENSE.txt": "/react-movies-app/static/js/2.8a61a9d3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b1a61028.js",
+    "static/js/runtime-main.2d1311fd.js",
     "static/js/2.8a61a9d3.chunk.js",
-    "static/js/main.b05ffbd9.chunk.js"
+    "static/js/main.ae1a9291.chunk.js"
   ]
 }
