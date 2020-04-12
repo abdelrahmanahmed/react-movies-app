@@ -1,3 +1,5 @@
+![CI](https://github.com/abdelrahmanahmed/react-movies-app/workflows/CI/badge.svg?branch=master)
+
 # Description
 This repository is created to fetch Movies and actors data from the movie DB API, the task is about creating a front-end app to display a simple search module for movies and actors using React with typescript
 # Requirements
