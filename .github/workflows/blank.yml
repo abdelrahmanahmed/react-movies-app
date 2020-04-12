@@ -28,7 +28,7 @@ jobs:
         node-version: '12.16.2'
     # Runs a single command using the runners shell
     - name: install dependencies 
-      run: npm intall
+      run: npm install
 
     # Runs a set of commands using the runners shell
     - name: run tests
